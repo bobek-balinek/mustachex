@@ -5,6 +5,7 @@
   "main": "mustachex.js",
   "keywords": [ "mustache", "express", "template", "layout", "partial" ],
   "author": "Martin Rue",
+  "repository": "https://github.com/martinrue/mustachex",
   "license": "BSD",
   "dependencies": {
     "mustache": "~0.7.2",
