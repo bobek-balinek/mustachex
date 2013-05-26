@@ -1,0 +1,23 @@
+{
+  "name": "mustachex",
+  "version": "0.0.1",
+  "description": "mustachex makes using the mustache templating engine in express really simple",
+  "main": "mustachex.js",
+  "keywords": [ "mustache", "express", "template", "layout", "partial" ],
+  "author": "Martin Rue",
+  "license": "BSD",
+  "dependencies": {
+    "mustache": "~0.7.2",
+    "glob": "~3.2.1",
+    "async": "~0.2.8",
+    "underscore": "~1.4.4",
+    "jasmine-node": "~1.7.1"
+  },
+  "devDependencies": {
+    "express": "~3.2.5",
+    "request": "~2.21.0"
+  },
+  "scripts": {
+    "test": "./node_modules/jasmine-node/bin/jasmine-node --verbose spec --config test true"
+  }
+}
