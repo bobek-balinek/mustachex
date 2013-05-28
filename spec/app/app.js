@@ -30,7 +30,15 @@ app.get('/custompartial', function(req, res) {
 });
 
 app.get('/defaultlayout', function(req, res) {
-  res.render('defaultlayout', { layout: true });
+  res.render('body', { layout: true });
+});
+
+app.get('/customlayout', function(req, res) {
+  res.render('body', { layout: 'customlayout' });
+});
+
+app.get('/customlayoutpath', function(req, res) {
+  res.render('body', { layout: 'layout/custom' });
 });
 
 app.loadCustomPartials = function(onComplete) {

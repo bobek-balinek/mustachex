@@ -45,6 +45,20 @@ describe('mustachex', function() {
     });
   });
 
+  it('renders templates with custom layout', function(done) {
+    request(baseUrl + '/customlayout', function(err, response, body) {
+      expect(body).toBe('<custom>body content</custom>');
+      done();
+    });
+  });
+
+  it('renders templates with custom layout path', function(done) {
+    request(baseUrl + '/customlayoutpath', function(err, response, body) {
+      expect(body).toBe('<abc>body content</abc>');
+      done();
+    });
+  });
+
   it('renders partials from custom directory', function(done) {
     app.loadCustomPartials(function() {
       request(baseUrl + '/custompartial', function(err, response, body) {

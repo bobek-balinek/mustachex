@@ -7,10 +7,6 @@ var _ = require('underscore');
 
 var _partials = null;
 
-var _getDefaultPartialDirectory = function(filename) {
-  return path.join(path.dirname(filename), 'partials');
-};
-
 var _renderTemplate = function(filename, options, onComplete) {
   fs.readFile(filename, 'utf8', function(err, data) {
     if (err) return onComplete(err);
@@ -39,16 +35,28 @@ var _loadPartials = function(directory, onComplete) {
   });
 };
 
-var express = function(filename, options, onComplete) {
-  _loadPartials(_getDefaultPartialDirectory(filename), function(err) {
-    if (err) return onComplete(err);
-    _renderTemplate(filename, options, onComplete);
-  });
+var _getLayoutFilePath = function(options) {
+  var layoutname = options.layout === true ? 'layout' : options.layout;
+  var layoutfile = layoutname + '.' + options.settings['view engine'];
+  return path.join(options.settings.views, layoutfile);
 };
 
 var loadPartials = function(directory, onComplete) {
   _partials = null;
   return _loadPartials(directory, onComplete);
+};
+
+var express = function(filename, options, onComplete) {
+  _loadPartials(path.join(options.settings.views, 'partials'), function(err) {
+    if (err) return onComplete(err);
+
+    return _renderTemplate(filename, options, function(err, data) {
+      if (!options.layout) return onComplete(null, data);
+
+      options.body = data;
+      _renderTemplate(_getLayoutFilePath(options), options, onComplete);
+    });
+  });
 };
 
 module.exports = {
