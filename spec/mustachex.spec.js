@@ -59,6 +59,15 @@ describe('mustachex', function() {
     });
   });
 
+  it('renders templates with layout via global layout setting', function(done) {
+    app.setGlobalUseLayout(true);
+    require(baseUrl + '/globallayout', function(err, response, body) {
+      expect(body).toBe('<body>body content</body>');
+      app.setGlobalUseLayout(false);
+      done();
+    });
+  });
+
   it('renders partials from custom directory', function(done) {
     app.loadCustomPartials(function() {
       request(baseUrl + '/custompartial', function(err, response, body) {

@@ -41,8 +41,16 @@ app.get('/customlayoutpath', function(req, res) {
   res.render('body', { layout: 'layout/custom' });
 });
 
+app.get('/globallayout', function(req, res) {
+  res.render('body');
+});
+
 app.loadCustomPartials = function(onComplete) {
   mustachex.loadPartials(__dirname + '/views/custompartials', onComplete);
+};
+
+app.setGlobalUseLayout = function(enabled) {
+  app.set('layout', enabled);
 };
 
 module.exports = app;
