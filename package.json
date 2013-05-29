@@ -8,7 +8,8 @@
     "express",
     "template",
     "layout",
-    "partial"
+    "partial",
+    "layout"
   ],
   "author": "Martin Rue",
   "homepage": "https://github.com/martinrue/mustachex",
