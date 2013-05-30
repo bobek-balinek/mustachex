@@ -104,4 +104,4 @@ app.get('/', function(req, res) {
 });
 ```
 
-Turning layout off on a per-route basis can then be achieved by passing `{ layout: false }`.
+Turning layout off on a per-route basis can then be achieved by passing `{ layout: false }` to `res.render`.
