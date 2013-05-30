@@ -1,6 +1,6 @@
 {
   "name": "mustachex",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "mustachex makes using the mustache templating engine in express really simple",
   "main": "mustachex.js",
   "keywords": [

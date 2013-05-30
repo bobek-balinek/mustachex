@@ -25,7 +25,7 @@ var _loadPartials = function(directory, onComplete) {
     });
   };
 
-  glob(path.join(directory, '*.*'), function(err, files) {
+  glob(path.join(directory, '**/*.*'), function(err, files) {
     if (err) return onComplete(err);
 
     async.map(files, readTemplate, function(err, templates) {
@@ -47,6 +47,14 @@ var loadPartials = function(directory, onComplete) {
 };
 
 var express = function(filename, options, onComplete) {
+  if (options.layout === undefined && options.settings.layout) {
+    options.layout = options.settings.layout;
+  }
+
+  if (options.settings.env === 'development') {
+    _partials = null;
+  }
+
   _loadPartials(path.join(options.settings.views, 'partials'), function(err) {
     if (err) return onComplete(err);
 

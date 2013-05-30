@@ -37,8 +37,7 @@ app.get('/', function(req, res) {
 ```
 
 ### Partials
-By default, mustachex loads all partials from the subdirectory `partials` of the express view directory. 
-This means that partials just work without any extra configuration required:
+By default, mustachex loads all partials from the subdirectory named `partials` (and every subdirectory below) of the express `views` directory. This means that partials just work without any extra configuration required:
 
 **views/partials/hello.html**
 ```html
@@ -70,8 +69,7 @@ app.configure(function() {
 ```
 
 ### Layout
-mustachex supports the concept of a layout template. Pass `layout: true` or `layout: 'customfile'` to `res.render` to specify
-that the template should use a layout template:
+mustachex supports the concept of a layout template. Pass `{ layout: true }` or `{ layout: 'customfile' }` to `res.render` to specify that the template should use a layout template:
 
 **views/layout.html**
 ```html
@@ -89,3 +87,21 @@ app.get('/', function(req, res) {
   res.render('index', { layout: true });
 });
 ```
+
+If you always want mustachex to use a layout file, set the `layout` option in your express application and you'll no longer need to specify `{ layout: true }` in each `res.render` call:
+
+```javascript
+app.configure(function() {
+  app.engine('html', mustachex.express);
+  app.set('view engine', 'html');
+  app.set('views', __dirname + '/views');
+  app.set('layout', true);
+});
+
+app.get('/', function(req, res) {
+  // layout will be used
+  res.render('index');
+});
+```
+
+Turning layout off on a per-route basis can then be achieved by passing `{ layout: false }`.

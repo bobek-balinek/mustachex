@@ -29,6 +29,10 @@ app.get('/custompartial', function(req, res) {
   res.render('custompartial');
 });
 
+app.get('/subpartial', function(req, res) {
+  res.render('subpartial');
+});
+
 app.get('/defaultlayout', function(req, res) {
   res.render('body', { layout: true });
 });
@@ -45,11 +49,15 @@ app.get('/globallayout', function(req, res) {
   res.render('body');
 });
 
+app.get('/globallayoutoverride', function(req, res) {
+  res.render('body', { layout: false });
+});
+
 app.loadCustomPartials = function(onComplete) {
   mustachex.loadPartials(__dirname + '/views/custompartials', onComplete);
 };
 
-app.setGlobalUseLayout = function(enabled) {
+app.setGlobalLayout = function(enabled) {
   app.set('layout', enabled);
 };
 

@@ -38,6 +38,13 @@ describe('mustachex', function() {
     });
   });
 
+  it('renders templates with partials in sub directories', function(done) {
+    request(baseUrl + '/subpartial', function(err, response, body) {
+      expect(body).toBe('sub partial');
+      done();
+    });
+  });
+
   it('renders templates with default layout', function(done) {
     request(baseUrl + '/defaultlayout', function(err, response, body) {
       expect(body).toBe('<body>body content</body>');
@@ -60,10 +67,19 @@ describe('mustachex', function() {
   });
 
   it('renders templates with layout via global layout setting', function(done) {
-    app.setGlobalUseLayout(true);
-    require(baseUrl + '/globallayout', function(err, response, body) {
+    app.setGlobalLayout(true);
+    request(baseUrl + '/globallayout', function(err, response, body) {
       expect(body).toBe('<body>body content</body>');
-      app.setGlobalUseLayout(false);
+      app.setGlobalLayout(false);
+      done();
+    });
+  });
+
+  it('can override global layout setting', function(done) {
+    app.setGlobalLayout(true);
+    request(baseUrl + '/globallayoutoverride', function(err, response, body) {
+      expect(body).toBe('body content');
+      app.setGlobalLayout(false);
       done();
     });
   });
