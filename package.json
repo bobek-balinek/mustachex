@@ -22,7 +22,8 @@
     "mustache": "~0.7.2",
     "glob": "~3.2.1",
     "async": "~0.2.9",
-    "underscore": "~1.4.4"
+    "underscore": "~1.4.4",
+    "graceful-fs": "~2.0.3"
   },
   "devDependencies": {
     "jasmine-node": "~1.7.1",
